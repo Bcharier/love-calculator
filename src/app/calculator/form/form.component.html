@@ -1,0 +1,17 @@
+<form [formGroup]="form" autocomplete="off" (ngSubmit)="submitForm()">
+  <ion-img src="assets/heart-with-arrow.svg" alt="heart" />
+  <app-form-input 
+    [placeholderInput]="placeholderInput1" 
+    [label]="'Premier personnage'" 
+    [formControlInput]="form.controls.name1"
+    >
+  </app-form-input>
+  <app-form-input 
+    [placeholderInput]="placeholderInput2" 
+    [label]="'Deuxième personnage'" 
+    [formControlInput]="form.controls.name2">
+  </app-form-input>
+  <section class="controls">
+  <ion-button type="submit">C'est parti !</ion-button>
+  </section>
+  </form>

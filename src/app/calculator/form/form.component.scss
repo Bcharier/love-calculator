@@ -1,0 +1,22 @@
+  /* --- form --- */
+  form {
+    margin: 1rem;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 1rem;
+  }
+   
+  section.input span {
+    color: red;
+  }
+   
+  ion-img {
+    height: 80px;
+    width: 80px;
+    justify-self: center;
+  }
+   
+  section.controls {
+    justify-self: center;
+  }
+  /* --- /form --- */
