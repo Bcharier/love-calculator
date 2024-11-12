@@ -29,7 +29,6 @@ export class CalculatorPage implements OnInit {
       message: 'Calculating...',
     });
     await loading.present();
-    
     const res = this.service.calculate(name1, name2).subscribe({
       next: res => {
         this.loveResult = res;
