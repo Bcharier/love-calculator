@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoveService } from '../love.service';
+import { LoveResult, LoveService } from '../love.service';
 
 @Component({
   selector: 'app-calculator',
@@ -13,7 +13,10 @@ export class CalculatorPage implements OnInit {
   placeholder1 = 'Batman';
   placeholder2 = 'Robin';
 
+  loveResult!: LoveResult;
+
   lovePercentage: string = '0';
+  loveMessage: string = '';
 
   constructor(readonly service: LoveService) { }
 
@@ -22,9 +25,7 @@ export class CalculatorPage implements OnInit {
 
   onFormSubmit([name1, name2]: [string, string]) {
     const res = this.service.calculate(name1, name2).subscribe({
-      next: res => {
-        this.lovePercentage = res.percentage;
-      },
+      next: res => this.loveResult = res,
     });
   }
 

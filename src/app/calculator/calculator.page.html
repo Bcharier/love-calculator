@@ -16,8 +16,10 @@
       [placeholderInput2]="placeholder2"
       (formSubmit)="onFormSubmit($event)"
     />
-    <app-result
-      [lovePercentage]="lovePercentage"
+    @if (loveResult) {
+      <app-result
+      [loveResult]="loveResult"
     />
+    }
   </div>
   </ion-content>

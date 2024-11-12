@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { LoveResult } from 'src/app/love.service';
 
 @Component({
   selector: 'app-result',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultComponent  implements OnInit {
 
-  @Input() lovePercentage!: string;
+  @Input() loveResult!: LoveResult;
 
   constructor() { }
 
