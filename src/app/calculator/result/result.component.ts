@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultComponent  implements OnInit {
 
+  @Input() lovePercentage!: string;
 
   constructor() { }
 

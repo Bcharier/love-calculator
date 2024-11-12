@@ -13,6 +13,8 @@ export class CalculatorPage implements OnInit {
   placeholder1 = 'Batman';
   placeholder2 = 'Robin';
 
+  lovePercentage: string = '0';
+
   constructor(readonly service: LoveService) { }
 
   ngOnInit() {
@@ -20,7 +22,9 @@ export class CalculatorPage implements OnInit {
 
   onFormSubmit([name1, name2]: [string, string]) {
     const res = this.service.calculate(name1, name2).subscribe({
-      next: res => console.log(res),
+      next: res => {
+        this.lovePercentage = res.percentage;
+      },
     });
   }
 
