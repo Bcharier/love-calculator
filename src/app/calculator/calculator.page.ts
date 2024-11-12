@@ -16,4 +16,8 @@ export class CalculatorPage implements OnInit {
   ngOnInit() {
   }
 
+  onFormSubmit([name1, name2]: [string, string]) {
+    console.log(name1, name2);
+  }
+
 }
