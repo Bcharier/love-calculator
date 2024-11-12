@@ -10,13 +10,15 @@ import { CalculatorPage } from './calculator.page';
 import { FormComponent } from './form/form.component';
 import { ResultComponent } from './result/result.component';
 import { FormInputComponent } from './form/form-input/form-input.component';
+import { PercentagePipe } from '../percetange.pipe';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     IonicModule,
-    CalculatorPageRoutingModule
+    CalculatorPageRoutingModule,
+    PercentagePipe
   ],
   declarations: [CalculatorPage, FormComponent, ResultComponent,FormInputComponent]
 })
