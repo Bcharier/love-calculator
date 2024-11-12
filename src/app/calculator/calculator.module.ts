@@ -10,7 +10,7 @@ import { CalculatorPage } from './calculator.page';
 import { FormComponent } from './form/form.component';
 import { ResultComponent } from './result/result.component';
 import { FormInputComponent } from './form/form-input/form-input.component';
-import { PercentagePipe } from '../percetange.pipe';
+import { PercentagePipe } from '../percentage.pipe';
 
 @NgModule({
   imports: [
