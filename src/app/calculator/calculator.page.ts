@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoveService } from '../love.service';
 
 @Component({
   selector: 'app-calculator',
@@ -8,16 +9,19 @@ import { Component, OnInit } from '@angular/core';
 export class CalculatorPage implements OnInit {
 
   title = 'Love Calculator';
+
   placeholder1 = 'Batman';
   placeholder2 = 'Robin';
 
-  constructor() { }
+  constructor(readonly service: LoveService) { }
 
   ngOnInit() {
   }
 
   onFormSubmit([name1, name2]: [string, string]) {
-    console.log(name1, name2);
+    const res = this.service.calculate(name1, name2).subscribe({
+      next: res => console.log(res),
+    });
   }
 
 }
