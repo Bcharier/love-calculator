@@ -10,11 +10,15 @@ export class HistoryPage implements OnInit {
 
   constructor(readonly service: LoveService) { }
 
+  get history() {
+    return this.service.history;
+  }
+
   ngOnInit() {
   }
 
-  get history() {
-    return this.service.history;
+  clearHistory() {
+    this.service.clear();
   }
 
 }

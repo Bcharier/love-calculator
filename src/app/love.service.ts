@@ -41,5 +41,9 @@ export class LoveService {
     );
     return request;
   }
+
+  clear() {
+    this.history = [];
+  }
 }
 
