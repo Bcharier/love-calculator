@@ -6,5 +6,5 @@ export const resultIdMatchGuard: CanMatchFn = (route, segments) => {
 
   if(!id) return true;
 
-  return /^[0-9]+$/.test(id);
+  return /^\d+$/.test(id);
 };
