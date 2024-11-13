@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoveService, LoveResult } from '../love.service';
-import { AlertController, ToastController, ActionSheetController } from '@ionic/angular';
+import { AlertController, ToastController, ActionSheetController, ModalController } from '@ionic/angular';
+import { ResultModalComponent } from './result-modal/result-modal.component';
 
 @Component({
   selector: 'app-history',
@@ -13,7 +14,8 @@ export class HistoryPage implements OnInit {
     readonly service: LoveService, 
     readonly alertController: AlertController, 
     readonly toastController: ToastController,
-    readonly actionsheetController: ActionSheetController
+    readonly actionsheetController: ActionSheetController,
+    readonly modalController: ModalController
   ) { }
 
   get history() {
@@ -61,7 +63,13 @@ async clearHistory() {
     await actionSheet.present();
   }
 
-  onClick(loveResult: LoveResult) {
-    console.log('click', loveResult);
+  async onClick(loveResult: LoveResult) {
+    const modal = await this.modalController.create({
+      component: ResultModalComponent,
+      componentProps: {
+        loveResultInput: loveResult,
+      }
+    })
+    await modal.present();
   }
 }
