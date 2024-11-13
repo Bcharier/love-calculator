@@ -4,7 +4,7 @@
     <p>{{result.percentage | percentage}}</p>
   </ion-label>
   <ion-buttons slot="end">
-      <ion-button (click)="actions.emit(result)">
+      <ion-button (click)="actions.emit(result)" onkeypress="actions.emit(result)">
         <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
