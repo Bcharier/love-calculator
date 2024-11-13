@@ -36,8 +36,6 @@ export class FormComponent  implements OnChanges {
 
 
   submitForm() {
-    console.log(this.form);
-
     const {form} = this;
 
     if(this.form.invalid) {
