@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoveService, LoveResult } from '../love.service';
 import { AlertController, ToastController, ActionSheetController, ModalController } from '@ionic/angular';
 import { ResultModalComponent } from './result-modal/result-modal.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-history',
@@ -15,7 +16,8 @@ export class HistoryPage implements OnInit {
     readonly alertController: AlertController, 
     readonly toastController: ToastController,
     readonly actionsheetController: ActionSheetController,
-    readonly modalController: ModalController
+    readonly modalController: ModalController,
+    readonly router: Router
   ) { }
 
   get history() {
@@ -58,6 +60,10 @@ async clearHistory() {
           text: 'Delete Item',
           handler: () => this.service.remove(loveResult),
         },
+        {
+          text: 'Run again',
+          handler: () => this.router.navigate(['/calculator', loveResult.id]),
+        }
       ]
     });
     await actionSheet.present();

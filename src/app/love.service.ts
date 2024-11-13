@@ -50,5 +50,9 @@ export class LoveService {
     const index = this.history.indexOf(loveResult);
     this.history.splice(index, 1);
   }
+
+  get(id: string) {
+    return this.history.find(res => res.id === id);
+  }
 }
 
