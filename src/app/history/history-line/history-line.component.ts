@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { LoveResult } from 'src/app/love.service';
+import { LoveService } from 'src/app/love.service';
 
 @Component({
   selector: 'app-history-line',
@@ -10,7 +11,9 @@ export class HistoryLineComponent  implements OnInit {
 
   @Input() result!: LoveResult;
 
-  constructor() { }
+  @Output() actions = new EventEmitter<LoveResult>();
+
+  constructor(readonly service: LoveService) { }
 
   ngOnInit() {}
 

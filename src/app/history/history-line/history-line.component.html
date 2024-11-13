@@ -3,4 +3,9 @@
     <h4>{{result.fname}} - {{result.sname}}</h4>
     <p>{{result.percentage | percentage}}</p>
   </ion-label>
+  <ion-buttons slot="end">
+      <ion-button (click)="actions.emit(result)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
 </ion-item>

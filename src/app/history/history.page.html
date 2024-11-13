@@ -17,7 +17,7 @@
   </ion-header>
   <ion-list>
     @for(result of history; track result.id) {
-      <app-history-line [result]="result" />
+      <app-history-line [result]="result" (actions)="onActions($event)" />
     }
   </ion-list>
 </ion-content>

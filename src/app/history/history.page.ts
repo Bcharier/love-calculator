@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { LoveService } from '../love.service';
-import { AlertController, ToastController } from '@ionic/angular';
+import { LoveService, LoveResult } from '../love.service';
+import { AlertController, ToastController, ActionSheetController } from '@ionic/angular';
 
 @Component({
   selector: 'app-history',
@@ -9,7 +9,12 @@ import { AlertController, ToastController } from '@ionic/angular';
 })
 export class HistoryPage implements OnInit {
 
-  constructor(readonly service: LoveService, readonly alertController: AlertController, readonly toastController: ToastController) { }
+  constructor(
+    readonly service: LoveService, 
+    readonly alertController: AlertController, 
+    readonly toastController: ToastController,
+    readonly actionsheetController: ActionSheetController
+  ) { }
 
   get history() {
     return this.service.history;
@@ -42,5 +47,17 @@ async clearHistory() {
       ]
     });
     await alert.present();
+  }
+
+  async onActions(loveResult: LoveResult) {
+    const actionSheet = await this.actionsheetController.create({
+      buttons: [
+        {
+          text: 'Delete Item',
+          handler: () => this.service.remove(loveResult),
+        },
+      ]
+    });
+    await actionSheet.present();
   }
 }
