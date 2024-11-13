@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { LoveResult } from 'src/app/love.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-result-modal',
@@ -10,8 +11,14 @@ export class ResultModalComponent  implements OnInit {
 
   @Input({ required: true}) loveResultInput!: LoveResult;
 
-  constructor() { }
+  constructor(
+    readonly modalController: ModalController
+  ) {}
 
   ngOnInit() {}
+
+  close() {
+    this.modalController.dismiss();
+  }
 
 }
