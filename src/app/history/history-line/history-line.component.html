@@ -1,5 +1,5 @@
 <ion-item>
-  <ion-label>
+  <ion-label (click)="clickLine.emit(result)" onkeypress="clickResult.emit(result)">
     <h4>{{result.fname}} - {{result.sname}}</h4>
     <p>{{result.percentage | percentage}}</p>
   </ion-label>

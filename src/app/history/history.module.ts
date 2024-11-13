@@ -9,6 +9,7 @@ import { HistoryPageRoutingModule } from './history-routing.module';
 import { HistoryPage } from './history.page';
 import { HistoryLineComponent } from './history-line/history-line.component';
 import { PercentagePipe } from '../percentage.pipe';
+import { ResultModalComponent } from './result-modal/result-modal.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { PercentagePipe } from '../percentage.pipe';
     HistoryPageRoutingModule,
     PercentagePipe
   ],
-  declarations: [HistoryPage, HistoryLineComponent]
+  declarations: [HistoryPage, HistoryLineComponent, ResultModalComponent],
 })
 export class HistoryPageModule {}

@@ -10,6 +10,7 @@ import { LoveService } from 'src/app/love.service';
 export class HistoryLineComponent  implements OnInit {
 
   @Input() result!: LoveResult;
+  @Output() clickLine = new EventEmitter<LoveResult>();
 
   @Output() actions = new EventEmitter<LoveResult>();
 

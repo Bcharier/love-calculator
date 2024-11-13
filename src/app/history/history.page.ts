@@ -60,4 +60,8 @@ async clearHistory() {
     });
     await actionSheet.present();
   }
+
+  onClick(loveResult: LoveResult) {
+    console.log('click', loveResult);
+  }
 }
