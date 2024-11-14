@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, tap } from 'rxjs';
+import { map, mergeMap, tap } from 'rxjs';
+import { ApiService } from './api.service';
  
 export interface LoveResult {
   id: string;
@@ -17,7 +18,10 @@ export class LoveService {
 
   history: LoveResult[] = [];
  
-  constructor(readonly http: HttpClient) { }
+  constructor(
+    readonly http: HttpClient,
+    readonly api: ApiService
+  ) { }
  
   calculate(name1: string, name2: string) {
     const request = this.http.get<LoveResult>(
@@ -37,7 +41,8 @@ export class LoveService {
       // permet d'ajouter un id sur le résultat qui sera
       // nécessaire plus tard
       map(res => ({ ...res, id: Date.now().toString() })),
-      tap(res => this.history.push(res))
+      // tap(res => this.history.push(res))
+      mergeMap(res => this.api.addResult(res))
     );
     return request;
   }
