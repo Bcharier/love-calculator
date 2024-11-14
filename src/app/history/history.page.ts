@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoveService, LoveResult } from '../love.service';
-import { AlertController, ToastController, ActionSheetController, ModalController } from '@ionic/angular';
+import { AlertController, ToastController, ActionSheetController, ModalController, ViewWillEnter } from '@ionic/angular';
 import { ResultModalComponent } from './result-modal/result-modal.component';
 import { Router } from '@angular/router';
+import { mergeMap } from 'rxjs';
 
 @Component({
   selector: 'app-history',
   templateUrl: './history.page.html',
   styleUrls: ['./history.page.scss'],
 })
-export class HistoryPage implements OnInit {
+export class HistoryPage implements ViewWillEnter {
 
   constructor(
     readonly service: LoveService, 
@@ -24,7 +25,11 @@ export class HistoryPage implements OnInit {
     return this.service.history;
   }
 
-  ngOnInit() {}
+  ionViewWillEnter() {
+    this.service.getAll().subscribe({
+      next: res => this.service.history = res
+    });
+  }
 
 async clearHistory() {
     const alert = await this.alertController.create({
@@ -40,12 +45,20 @@ async clearHistory() {
           text: 'Confirm',
           role: 'confirm',
           handler: async () => {
-            this.service.clear();
-            const toast = await this.toastController.create({
-              message: 'History cleared',
-              duration: 2000,
+            this.service.clear()
+            .pipe(
+              mergeMap(() => this.service.getAll())
+            )
+            .subscribe({
+              next: async res => {
+                this.service.history = res;
+                const toast = await this.toastController.create({
+                  message: 'History cleared',
+                  duration: 1000,
+                });
+                await toast.present();
+              }
             });
-            await toast.present();
           }
         }
       ]
@@ -58,7 +71,14 @@ async clearHistory() {
       buttons: [
         {
           text: 'Delete Item',
-          handler: () => this.service.remove(loveResult),
+          handler: () => {
+            this.service.remove(loveResult).pipe(
+              mergeMap(() => this.service.getAll())
+            ).subscribe({
+              next: res => this.service.history = res
+            });
+            return true;
+          }
         },
         {
           text: 'Run again',

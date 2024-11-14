@@ -7,11 +7,25 @@ import { LoveResult } from './love.service';
 })
 export class ApiService {
 
+  readonly url = 'http://localhost:3000/results';
+
   constructor(readonly http: HttpClient) { }
 
-  addResult(loveResult: LoveResult) {
-    return this.http.post<LoveResult>('http://localhost:3000/results', loveResult);
+  getAllResults() {
+    return this.http.get<LoveResult[]>(this.url);
   }
 
+  getOneResult(id: string) {
+    return this.http.get<LoveResult>(`${this.url}/${id}`);
+  }
   
+  addResult(loveResult: LoveResult) {
+    return this.http.post<LoveResult>(this.url, loveResult);
+  }
+
+  removeResult(id: string) {
+    return this.http.delete<LoveResult>(`${this.url}/${id}`);
+  }
+
+
 }

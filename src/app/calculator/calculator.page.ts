@@ -30,15 +30,16 @@ export class CalculatorPage implements OnChanges {
   ) {}
 
   ngOnChanges() {
-    const loveResult = this.service.get(this.id);
-    if(!loveResult) return;
-
-    this.name1 = loveResult.fname;
-    this.name2 = loveResult.sname;
+    if(!this.id) return;
+    this.service.get(this.id).subscribe({
+      next: loveResult => {
+        this.loveResult = loveResult;
+        this.name1 = loveResult.fname;
+        this.name2 = loveResult.sname;
+        }
+      });
     
   }
-
-
 
   async onFormSubmit([name1, name2]: [string, string]) {
     const loading = await this.loadingController.create({

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, mergeMap, tap } from 'rxjs';
+import { forkJoin, map, mergeMap } from 'rxjs';
 import { ApiService } from './api.service';
  
 export interface LoveResult {
@@ -48,16 +48,27 @@ export class LoveService {
   }
 
   clear() {
-    this.history = [];
+    return this.api
+    .getAllResults()
+    .pipe(
+      mergeMap(result => {
+        return forkJoin(
+          result.map(r => this.api.removeResult(r.id))
+        )
+      })
+    )
   }
 
   remove(loveResult: LoveResult) {
-    const index = this.history.indexOf(loveResult);
-    this.history.splice(index, 1);
+    return this.api.removeResult(loveResult.id);
   }
 
   get(id: string) {
-    return this.history.find(res => res.id === id);
+    return this.api.getOneResult(id);
+  }
+
+  getAll() {
+    return this.api.getAllResults();
   }
 }
 
